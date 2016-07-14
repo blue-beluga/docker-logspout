@@ -1,0 +1,2 @@
+
+export LOGSPOUT_VERSION=3.2

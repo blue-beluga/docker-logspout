@@ -1,0 +1,18 @@
+# encoding: UTF-8
+
+FROM <%= ENV.fetch('FROM') %>
+MAINTAINER The Blue Beluga <admin@bluebeluga.io>
+
+LABEL name="logspout"
+LABEL description="Alpine Linux Base with Logspout"
+LABEL version="<%= ENV.fetch('LOGSPOUT_VERSION') %>"
+
+ENTRYPOINT ["/bin/logspout"]
+VOLUME /mnt/routes
+EXPOSE 8000
+
+COPY files/. /src
+RUN cd /src && ./build.sh "$(cat VERSION)"
+
+ONBUILD COPY ./modules.go /src/modules.go
+ONBUILD RUN cd /src && ./build.sh "$(cat VERSION)-custom"
