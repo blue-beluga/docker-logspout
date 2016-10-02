@@ -3,9 +3,11 @@
 FROM <%= ENV.fetch('FROM') %>
 MAINTAINER The Blue Beluga <admin@bluebeluga.io>
 
-LABEL name="logspout"
-LABEL description="Alpine Linux Base with Logspout"
-LABEL version="<%= ENV.fetch('LOGSPOUT_VERSION') %>"
+LABEL vendor="The Blue Beluga Company"
+LABEL io.bluebeluga.logspout.description="Logspout"
+LABEL io.bluebeluga.logspout.version="<%= ENV.fetch('TAG') %>"
+LABEL io.bluebeluga.logspout.git-revision="<%= ENV.fetch('GIT_REVISION') %>"
+LABEL io.bluebeluga.logspout.release-date="<%= Time.now.strftime('%B %d, %Y %H:%M') %>"
 
 ENTRYPOINT ["/bin/logspout"]
 VOLUME /mnt/routes
